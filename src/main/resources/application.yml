@@ -1,0 +1,29 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: agentic-action-orchestrator
+
+  ai:
+    openai:
+      api-key: ${SPRING_AI_OPENAI_API_KEY:mock-key-for-development}
+      chat:
+        options:
+          model: gpt-4o-mini
+          temperature: 0.1
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: always
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html

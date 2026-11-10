@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  agentic-orchestrator:
+    build: .
+    container_name: agentic-orchestrator
+    ports:
+      - "8081:8081"
+    environment:
+      SPRING_AI_OPENAI_API_KEY: ${SPRING_AI_OPENAI_API_KEY:-mock-development-key}
+      SERVER_PORT: 8081
