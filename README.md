@@ -93,6 +93,19 @@ The application boots on port **`8081`**.
 
 ## 🧪 Testing the Agent
 
+### Simulation & Dry-Run Mode
+The orchestrator natively supports `dryRun: true` in the request payload. In dry-run mode, the engine evaluates user intent, parses dynamic entities, and generates deterministic tool bindings marked as `DRY_RUN_PLAN` without performing mutating calls to downstream tools:
+
+```bash
+curl -X POST http://localhost:8081/api/v1/agent/orchestrate \
+  -H "Content-Type: application/json" \
+  -d '{
+    "prompt": "Cancel order #9842 and refund R$ 350.50",
+    "contextUserId": "usr_ops_audit",
+    "dryRun": true
+  }'
+```
+
 ### Send an Orchestration Instruction
 ```bash
 curl -X POST http://localhost:8081/api/v1/agent/orchestrate \
@@ -119,7 +132,8 @@ curl -X POST http://localhost:8081/api/v1/agent/orchestrate \
       },
       "status": "SUCCESS",
       "output": "Order ord_7894 successfully marked as CANCELLED.",
-      "executedAt": "2026-11-10T03:40:12Z"
+      "executedAt": "2026-11-10T03:40:12Z",
+      "durationMs": 4
     },
     {
       "toolName": "refundServiceTool",

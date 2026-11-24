@@ -8,5 +8,10 @@ public record ToolInvocationRecord(
     Map<String, Object> arguments,
     String status,
     String output,
-    Instant executedAt
-) {}
+    Instant executedAt,
+    long durationMs
+) {
+    public ToolInvocationRecord(String toolName, Map<String, Object> arguments, String status, String output, Instant executedAt) {
+        this(toolName, arguments, status, output, executedAt, 0L);
+    }
+}
